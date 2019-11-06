@@ -101,7 +101,6 @@ function createKeyboard(eng, rus) {
             key = new Key(eng[i][j], rus[i][j]);
             keys.push(key.element());
         }
-        console.log(keys);
         createRow(keys);
         keys = [];
     }
