@@ -147,6 +147,8 @@ function createRow(buttons) {
     row_id++;
     buttons.forEach((key) => {
         row.appendChild(key);
+        key.addEventListener("mousedown", func_mousedown);
+        key.addEventListener("mouseup", func_mouseup);
         key.addEventListener("click", func_click);
     });
     document.getElementById("keyboard").appendChild(row);
@@ -168,11 +170,59 @@ function createKeyboard(eng, rus) {
     }
 }
 
+function func_mousedown(event) {
+    console.log(shift_pressed);
+    if (event.path[0].innerHTML == "CapsLock") {  
+    }
+    if (event.path[0].innerHTML == "Shift") {
+        let list;
+        if (shift_pressed == false) {
+            shift_pressed = true;
+            list = document.getElementsByClassName("usual_key");
+            for (var i = 0; i < list.length; i++) {
+                if (capslock_pressed) {
+                    list[i].innerHTML = list[i].innerHTML.toLowerCase(); 
+                }
+                else {
+                    list[i].innerHTML = list[i].innerHTML.toUpperCase(); 
+                }
+            }
+        }
+    }
+}
+
+function func_mouseup(event) {
+    if (event.path[0].innerHTML == "Shift") {
+        shift_pressed = false;
+        if (capslock_pressed) {
+            list = document.getElementsByClassName("usual_key");
+            for (var i = 0; i < list.length; i++) {
+                list[i].innerHTML = list[i].innerHTML.toUpperCase(); 
+            }
+        }
+        else {
+            list = document.getElementsByClassName("usual_key");
+            for (var i = 0; i < list.length; i++) {
+                list[i].innerHTML = list[i].innerHTML.toLowerCase(); 
+            }
+        }
+    }
+}
+
 function func_click(event) {
     if (event.path[0].innerHTML == "CapsLock") {  
         return;
     }
-    if (event.path[0].innerHTML == "Shift" || event.path[0].innerHTML == "Shift") {  
+    if (event.path[0].innerHTML == "Shift") {  
+        return;
+    }
+    if (event.path[0].innerHTML == "Alt") {  
+        return;
+    }
+    if (event.path[0].innerHTML == "Delete") {  
+        return;
+    }
+    if (event.path[0].innerHTML == "Backspace") {  
         return;
     }
     if (language == english) document.getElementById("input").value += event.path[0].innerHTML;
@@ -193,14 +243,16 @@ document.addEventListener("keydown", (event) => {
                     list = document.getElementsByClassName("usual_key");
                     for (var i = 0; i < list.length; i++) {
                         if (capslock_pressed) {
-                            list[i].innerHTML = list[i].innerHTML.toLowerCase(); 
+                            list[i].innerHTML = list[i].innerHTML.toLowerCase();
                         }
                         else {
                             list[i].innerHTML = list[i].innerHTML.toUpperCase(); 
                         }
                     }
+                    console.log("yeah0");
                 }
             }
+            console.log("yeah1");
             return;
         }
         try {
@@ -243,25 +295,20 @@ document.addEventListener("keypress", (event) => {
 });
 
 document.addEventListener("keyup", (event) => {
-    if (event.code == "ShiftRight" || event.code == "ShiftLeft") {
+    if (event.code == "ShiftLeft" || event.code == "ShiftRight") {
         shift_pressed = false;
-        if (capslock_pressed) {
-            capslock_pressed = false;
-            list = document.getElementsByClassName("usual_key");
-            for (var i = 0; i < list.length; i++) {
-                list[i].innerHTML = list[i].innerHTML.toUpperCase(); 
+        list = document.getElementsByClassName("usual_key");
+        for (var i = 0; i < list.length; i++) {
+            if (capslock_pressed) {
+                list[i].innerHTML = list[i].innerHTML.toUpperCase();
             }
-        }
-        else {
-            capslock_pressed = true;
-            list = document.getElementsByClassName("usual_key");
-            for (var i = 0; i < list.length; i++) {
+            else {
                 list[i].innerHTML = list[i].innerHTML.toLowerCase(); 
             }
         }
     }
     let length = document.getElementsByClassName("pressed").length;
-    for (let i = 0; i < length-1; i++) {
+    for (let i = 0; i < length; i++) {
         document.getElementsByClassName("pressed")[0].classList.remove("pressed");
     }
 });
