@@ -9,7 +9,7 @@ body {
     height: 100px;
     font-family: 'Open Sans';
     font-weight: bold;
-    font-size: 20px;
+    font-size: 13px;
     border: 1px solid black;
     input[type=text] {
         width: 800px;
@@ -26,7 +26,7 @@ body {
 }
 .row {
     display: flex;
-    flex-wrap: no-wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     margin-top: 10px;
     width: 100%;
@@ -43,7 +43,7 @@ body {
     border-radius: 25px;
     cursor: pointer;
     transition: .1s color ease;
-    transition: .15s transform ease-in-out;
+    transition: .05s transform ease-in-out;
     &:hover {
         transform: scale(1.1, 1.1);
     }
@@ -86,4 +86,12 @@ body {
 .delete {
     background-color: rgb(240, 54, 54);
     width: 100px;
+}
+.pressed {
+    transform: scale(0.9, 0.9);
+    outline: none;
+}
+.space-pressed {
+    transform: scale(0.95, 0.95);
+    outline: none;
 }
