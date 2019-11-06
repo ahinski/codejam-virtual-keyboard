@@ -7,7 +7,7 @@ let alt_count = 0;
 let ctrl_count = 0;
 
 const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", 
-                "v", "w", "x", "y", "z", "j"]
+                "v", "w", "x", "y", "z", "j", "i"]
 
 const english = [["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace"],
                 ["Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "Delete"],
@@ -130,8 +130,8 @@ class Key {
             }
             return key;
         }
-        key.classList.add("usual_key");
         if (alphabet.indexOf(this.eng) != -1) {
+            key.classList.add("usual_key");
             key.id = "Key"+this.eng.toUpperCase();
             return key;
         }
@@ -236,6 +236,15 @@ document.addEventListener("keydown", (event) => {
         if (event.location != 0) {
             document.getElementById(event.code).classList.add("pressed");
             document.getElementById(event.code).click();
+            if ((event.code == "AltRight" || event.code == "AltLeft") && shift_pressed) {
+                if (language == "english") language = "russian";
+                else language = "english";
+                list = document.getElementsByClassName("usual_key");
+                for (var i = 0; i < list.length; i++) {
+                    if (language == "russian") list[i].innerHTML = list[i].classList[2];
+                    else list[i].innerHTML = list[i].classList[1];
+                }
+            }
             if (event.code == "ShiftRight" || event.code == "ShiftLeft") {
                 let list;
                 if (shift_pressed == false) {
