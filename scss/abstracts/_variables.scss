@@ -1,0 +1,53 @@
+$body-color: #d1d098;
+$main-color: #3b827e;
+$dark-color: #013950;
+
+h1 {
+    margin: 10px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5em;
+    color: black;
+}
+h2 {
+    display: inline-block;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3em;
+    color: black;
+    vertical-align: center;
+}
+.education-btn h2 {
+    transition: color .1s ease;
+    &:after {
+        display: block;
+        content: "";
+        height: 2px;
+        width: 0%;
+        background-color: $dark-color;
+        transition: width .1s ease;
+    }
+}
+h3 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black;
+}
+.personal_info a {
+    font-family: 'Poppins';
+    color: black;
+    text-decoration: none;
+    transition: color .1s ease-in-out;
+    &:after {
+        display: block;
+        content: "";
+        height: 2px;
+        width: 0%;
+        background-color: $dark-color;
+        transition: width .1s ease-in-out;
+    }
+}
